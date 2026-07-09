@@ -1,0 +1,634 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "ServiceNow Custom Sample",
+    "description": "A sample connector for ServiceNow with basic CRUD for Incidents, OAuth and attachment support"
+  },
+  "host": "YourInstance.service-now.com",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/now/v2/table/sys_user/{sys_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "sys_id": {
+                        "type": "string",
+                        "description": "sys_id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "name"
+                      }
+                    }
+                  },
+                  "description": "result"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get User",
+        "operationId": "GetUser",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExcludeRefLinks"
+          },
+          {
+            "$ref": "#/parameters/SysParmFields"
+          },
+          {
+            "$ref": "#/parameters/DisplaySystemRefs"
+          },
+          {
+            "$ref": "#/parameters/SysIdParameter"
+          }
+        ],
+        "description": "Retrieves the specific user record using the provided Id parameter."
+      }
+    },
+    "/api/now/v1/attachment/{sys_id}": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "table_sys_id": {
+                      "type": "string",
+                      "description": "table_sys_id"
+                    },
+                    "size_bytes": {
+                      "type": "string",
+                      "description": "size_bytes"
+                    },
+                    "download_link": {
+                      "type": "string",
+                      "description": "download_link"
+                    },
+                    "sys_updated_on": {
+                      "type": "string",
+                      "description": "sys_updated_on"
+                    },
+                    "sys_id": {
+                      "type": "string",
+                      "description": "sys_id"
+                    },
+                    "image_height": {
+                      "type": "string",
+                      "description": "image_height"
+                    },
+                    "sys_created_on": {
+                      "type": "string",
+                      "description": "sys_created_on"
+                    },
+                    "file_name": {
+                      "type": "string",
+                      "description": "file_name"
+                    },
+                    "sys_created_by": {
+                      "type": "string",
+                      "description": "sys_created_by"
+                    },
+                    "compressed": {
+                      "type": "string",
+                      "description": "compressed"
+                    },
+                    "average_image_color": {
+                      "type": "string",
+                      "description": "average_image_color"
+                    },
+                    "sys_updated_by": {
+                      "type": "string",
+                      "description": "sys_updated_by"
+                    },
+                    "sys_tags": {
+                      "type": "string",
+                      "description": "sys_tags"
+                    },
+                    "table_name": {
+                      "type": "string",
+                      "description": "table_name"
+                    },
+                    "image_width": {
+                      "type": "string",
+                      "description": "image_width"
+                    },
+                    "sys_mod_count": {
+                      "type": "string",
+                      "description": "sys_mod_count"
+                    },
+                    "content_type": {
+                      "type": "string",
+                      "description": "content_type"
+                    },
+                    "size_compressed": {
+                      "type": "string",
+                      "description": "size_compressed"
+                    }
+                  },
+                  "description": "result"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get Attachment",
+        "description": "Returns the metadata of the attachment file provided a specific System ID for the attachment",
+        "operationId": "GetAttachment",
+        "parameters": [
+          {
+            "name": "sys_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "System ID of the attachment record for which to retrieve the metadata.",
+            "x-ms-summary": "System ID",
+            "x-ms-visibility": "important",
+            "x-ms-url-encoding": "single"
+          }
+        ]
+      },
+      "delete": {
+        "responses": {
+          "204": {
+            "description": "default",
+            "schema": {}
+          }
+        },
+        "summary": "Delete Attachment",
+        "description": "This method deletes the attachment for a provided System ID value",
+        "operationId": "DeleteAttachment",
+        "parameters": [
+          {
+            "name": "sys_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "System ID of the attachment record to delete.",
+            "x-ms-summary": "System ID",
+            "x-ms-visibility": "important",
+            "x-ms-url-encoding": "single"
+          }
+        ]
+      }
+    },
+    "/api/now/v1/attachment": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "table_sys_id": {
+                        "type": "string",
+                        "description": "table_sys_id"
+                      },
+                      "size_bytes": {
+                        "type": "string",
+                        "description": "size_bytes"
+                      },
+                      "download_link": {
+                        "type": "string",
+                        "description": "download_link"
+                      },
+                      "sys_updated_on": {
+                        "type": "string",
+                        "description": "sys_updated_on"
+                      },
+                      "sys_id": {
+                        "type": "string",
+                        "description": "sys_id"
+                      },
+                      "image_height": {
+                        "type": "string",
+                        "description": "image_height"
+                      },
+                      "sys_created_on": {
+                        "type": "string",
+                        "description": "sys_created_on"
+                      },
+                      "file_name": {
+                        "type": "string",
+                        "description": "file_name"
+                      },
+                      "sys_created_by": {
+                        "type": "string",
+                        "description": "sys_created_by"
+                      },
+                      "compressed": {
+                        "type": "string",
+                        "description": "compressed"
+                      },
+                      "average_image_color": {
+                        "type": "string",
+                        "description": "average_image_color"
+                      },
+                      "sys_updated_by": {
+                        "type": "string",
+                        "description": "sys_updated_by"
+                      },
+                      "sys_tags": {
+                        "type": "string",
+                        "description": "sys_tags"
+                      },
+                      "table_name": {
+                        "type": "string",
+                        "description": "table_name"
+                      },
+                      "image_width": {
+                        "type": "string",
+                        "description": "image_width"
+                      },
+                      "sys_mod_count": {
+                        "type": "string",
+                        "description": "sys_mod_count"
+                      },
+                      "content_type": {
+                        "type": "string",
+                        "description": "content_type"
+                      },
+                      "size_compressed": {
+                        "type": "string",
+                        "description": "size_compressed"
+                      }
+                    }
+                  },
+                  "description": "result"
+                }
+              }
+            }
+          }
+        },
+        "summary": "List Attachments",
+        "description": "Returns the metadata for multiple attachments.",
+        "operationId": "ListAttachments",
+        "parameters": [
+          {
+            "name": "sysparm_limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "Limit to be applied on pagination.",
+            "x-ms-summary": "Limit",
+            "x-ms-visibility": "advanced"
+          },
+          {
+            "name": "sysparm_query",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-summary": "Query",
+            "description": "Encoded query. Queries for the Attachment API are relative to the Attachments [sys_attachment] table.",
+            "x-ms-visibility": "advanced",
+            "x-ms-test-value": "ORDERBYfile_name^ORDERBYDESCtable_Name"
+          }
+        ]
+      }
+    },
+    "/api/now/v1/attachment/{sys_id}/file": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "format": "binary",
+              "title": "File Content"
+            }
+          }
+        },
+        "summary": "Get Attachment File",
+        "description": "Returns the binary file attachment for the specified System ID record of attachment",
+        "operationId": "GetAttachmentFile",
+        "parameters": [
+          {
+            "name": "sys_id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "System ID of the attachment record from which to return binary data.",
+            "x-ms-summary": "System ID",
+            "x-ms-visibility": "important",
+            "x-ms-url-encoding": "single"
+          }
+        ],
+        "x-ms-visibility": "important"
+      }
+    },
+    "/api/now/v1/attachment/file": {
+      "post": {
+        "responses": {
+          "201": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "table_sys_id": {
+                      "type": "string",
+                      "description": "table_sys_id"
+                    },
+                    "size_bytes": {
+                      "type": "string",
+                      "description": "size_bytes"
+                    },
+                    "download_link": {
+                      "type": "string",
+                      "description": "download_link"
+                    },
+                    "sys_updated_on": {
+                      "type": "string",
+                      "description": "sys_updated_on"
+                    },
+                    "sys_id": {
+                      "type": "string",
+                      "description": "sys_id"
+                    },
+                    "image_height": {
+                      "type": "string",
+                      "description": "image_height"
+                    },
+                    "sys_created_on": {
+                      "type": "string",
+                      "description": "sys_created_on"
+                    },
+                    "file_name": {
+                      "type": "string",
+                      "description": "file_name"
+                    },
+                    "sys_created_by": {
+                      "type": "string",
+                      "description": "sys_created_by"
+                    },
+                    "compressed": {
+                      "type": "string",
+                      "description": "compressed"
+                    },
+                    "average_image_color": {
+                      "type": "string",
+                      "description": "average_image_color"
+                    },
+                    "sys_updated_by": {
+                      "type": "string",
+                      "description": "sys_updated_by"
+                    },
+                    "sys_tags": {
+                      "type": "string",
+                      "description": "sys_tags"
+                    },
+                    "table_name": {
+                      "type": "string",
+                      "description": "table_name"
+                    },
+                    "image_width": {
+                      "type": "string",
+                      "description": "image_width"
+                    },
+                    "sys_mod_count": {
+                      "type": "string",
+                      "description": "sys_mod_count"
+                    },
+                    "content_type": {
+                      "type": "string",
+                      "description": "content_type"
+                    },
+                    "size_compressed": {
+                      "type": "string",
+                      "description": "size_compressed"
+                    }
+                  },
+                  "description": "result"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Opertation failed"
+          }
+        },
+        "summary": "Upload Attachment",
+        "description": "Uploads a specified binary file as an attachment to a specified record.  The file to attach must be specified after the last parameter in the passed-in request parameter list.",
+        "operationId": "UploadAttachment",
+        "parameters": [
+          {
+            "name": "table_name",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Table Name",
+            "description": "Name of the table to attach the file to.",
+            "x-ms-visibility": "important",
+            "x-ms-test-value": "incident",
+            "x-ms-dynamic-values": {
+              "operationId": "GetRecordTypes",
+              "value-collection": "result",
+              "value-path": "value",
+              "value-title": "label"
+            }
+          },
+          {
+            "name": "table_sys_id",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "System ID",
+            "description": "System ID of the record in the table as specified in Table Name.",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "file_name",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "File Name",
+            "description": "Name to give the attachment.",
+            "x-ms-visibility": "important"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "default": "application/json",
+            "x-ms-visibility": "internal",
+            "description": "Accept"
+          },
+          {
+            "name": "Content-Type",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "x-ms-summary": "Content Type",
+            "description": "Content Type",
+            "enum": [
+              "text/plain",
+              "text/css",
+              "text/csv",
+              "text/html",
+              "image/jpeg",
+              "image/png",
+              "application/octet-stream",
+              "application/json",
+              "audio/mpeg",
+              "video/mpeg"
+            ]
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "File content",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "x-ms-visibility": "important"
+      }
+    },
+    "/api/now/v2/table/incident": {
+      "get": {
+        "summary": "List Incidents",
+        "description": "Retrieves a list of incidents from ServiceNow",
+        "operationId": "ListIncidents",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExcludeRefLinks"
+          },
+          {
+            "$ref": "#/parameters/DisplaySystemRefs"
+          },
+          {
+            "$ref": "#/parameters/SysParmFields"
+          },
+          {
+            "name": "sysparm_limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "x-ms-summary": "Limit",
+            "x-ms-visibility": "advanced",
+            "description": "Maximum number of records to return"
+          },
+          {
+            "name": "sysparm_query",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-summary": "Query",
+            "x-ms-visibility": "advanced",
+            "description": "Encoded query used to filter the result set",
+            "x-ms-test-value": "active=true^ORDERBYshort_description"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "default",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "parent": {
+                        "type": "string",
+                        "description": "parent"
+                      },
+                      "made_sla": {
+                        "type": "string",
+                        "description": "made_sla"
+                      },
+                      "caused_by": {
+                        "type": "string",
+                        "description": "caused_by"
+                      },
+                      "watch_list": {
+                        "type": "string",
+                        "description": "watch_list"
+                      },
+                      "upon_reject": {
+                        "type": "string",
+                        "description": "upon_reject"
+                      },
+                      "sys_updated_on": {
+                        "type": "string",
+                        "description": "sys_updated_on"
+                      },
+                      "child_incidents": {
+                        "type": "string",
+                        "description": "child_incidents"
+                      },
+                      "hold_reason": {
+                        "type": "string",
+                        "description": "hold_reason",
+                        "title": "On hold reason",
+                        "x-ms-visibility": "advanced"
+                      },
+                      "task_effective_number": {
+                        "type": "string",
+                        "description": "task_effective_number"
+                      },
+                      "approval_history": {
+                        "type": "string",
+                        "description": "approval_history"
+                      },
+                      "number": {
+                        "type": "string",
+                        "description": "number"
+                      },
+                      "resolved_by": {
+                        "type": "string",
+                        "description": "resolved_by"
+                      },
+                      "sys_updated_by": {
+                        "type": "string",
+                        "description": "sys_updated_by"
+                      },
+                      "opened_by": {
+                        "type": "string",
+                        "description": "opened_by"
+                      },
+                      "user_input": {
+                        "type": "string",
+                        "description": "user_input"
+                      },
+                      "sys_created_on": {
+                        "type": "string",
+                        "description": "sys_created_on"
+                      },
+                      "sys_domain": {
+                        "type": "string",
+                        "description": "sys_domain"
+                      },
