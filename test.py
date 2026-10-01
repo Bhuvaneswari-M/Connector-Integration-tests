@@ -1,3 +1,4 @@
+//this code is for to calculate the total items
 def calculate_total(items):
     total = 0
     for item in items:
